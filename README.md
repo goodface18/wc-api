@@ -29,8 +29,8 @@ require __DIR__ . '/vendor/autoload.php';
 use Automattic\WooCommerce\Client;
 
 $woocommerce = new Client(
-    'http://example.com', 
-    'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX', 
+    'http://example.com',
+    'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
     'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
     [
         'version' => 'wc/v3',
@@ -156,3 +156,12 @@ try {
 - 2016-01-25 - 1.0.2 - Fixed an error when getting data containing non-latin characters.
 - 2016-01-21 - 1.0.1 - Sort all oAuth parameters before build request URLs.
 - 2016-01-11 - 1.0.0 - Stable release.
+
+
+ck_4630789d73c2c8334df7f772237c4297f6b66455
+cs_18dac969f5d4de3c4f2dbfe2eb95e0c3d8958d38
+
+https://woocommerce.webexpertdev.us/wp-admin/
+
+id : freelancer
+pass: freelancer2019
