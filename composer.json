@@ -1,0 +1,14 @@
+{
+    "name": "goodf/wc-api-php",
+    "description": "This for the api woocommerc",
+    "type": "project",
+    "authors": [
+        {
+            "name": "good face",
+            "email": "goodface18@outlook.com"
+        }
+    ],
+    "require": {
+        "automattic/woocommerce": "^3.0"
+    }
+}
