@@ -9,16 +9,24 @@ $woocommerce = new Client(
     'ck_4630789d73c2c8334df7f772237c4297f6b66455',
     'cs_18dac969f5d4de3c4f2dbfe2eb95e0c3d8958d38',
     [
-        'version' => 'wc/v3'
+        'version' => '/v3',
+        'wp_api_prefix' => '/wc-api'
     ]
 );
 
 
 try {
     // Array of response results.
-    $results = $woocommerce->getAll('customers');
-    echo count($results);
-    var_dump($results);
+    $results = $woocommerce->get('customers/count');
+    $count = $results->count;
+    $woocommerce = new Client(
+        'http://woocommerce.webexpertdev.us/',
+        'ck_4630789d73c2c8334df7f772237c4297f6b66455',
+        'cs_18dac969f5d4de3c4f2dbfe2eb95e0c3d8958d38',
+        [
+            'version' => 'wc/v3',
+        ]
+    );
 } catch (HttpClientException $e) {
     echo '<pre><code>' . print_r( $e->getMessage(), true ) . '</code><pre>'; // Error message.
     echo '<pre><code>' . print_r( $e->getRequest(), true ) . '</code><pre>'; // Last request data.
