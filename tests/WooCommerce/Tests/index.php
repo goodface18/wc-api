@@ -28,8 +28,8 @@ try {
             'version' => 'wc/v3',
         ]
     );
-    $results = $woocommerce->getWithCount('customers', $count);
-    echo(count($results));
+    $results = $woocommerce->getWithCount('customers');
+    echo(count($result))
     var_dump($results);
 } catch (HttpClientException $e) {
     echo '<pre><code>' . print_r( $e->getMessage(), true ) . '</code><pre>'; // Error message.

@@ -95,21 +95,9 @@ class Client
         $page_count = $count / 100;
         $nodes = array();
         $results_arr = array();
-        $curl_arr = array();
-        $master = curl_multi_init();
-        $httpArray = array();
         for($i=0; $i<$page_count; $i++){
             $nodes[i] = array('page' => $i + 1, 'per_page' => 100);
-            $httpArray[i] = new HttpClient($this->http->url, $this->http->consumerKey, $this->http->consumerSecret, $this->http->options);
-            $httpArray[i]->multiRequest($endpoint, 'GET', [], $nodes[i], $master);
-        }
-        do {
-            curl_multi_exec($master,$running);
-        } while($running > 0);
-
-        for($i = 0; $i < $page_count; $i++)
-        {
-            $results_arr[] = curl_multi_getcontent  ( $httpArray[i]->ch  );
+            array_merge($results_arr, $this->http->request($endpoint, 'GET', [], $nodes[i]));
         }
         return $results_arr;
     }
