@@ -29,35 +29,35 @@ class HttpClient
      *
      * @var resource
      */
-    public $ch;
+    protected $ch;
 
     /**
      * Store API URL.
      *
      * @var string
      */
-    public $url;
+    protected $url;
 
     /**
      * Consumer key.
      *
      * @var string
      */
-    public $consumerKey;
+    protected $consumerKey;
 
     /**
      * Consumer secret.
      *
      * @var string
      */
-    public $consumerSecret;
+    protected $consumerSecret;
 
     /**
      * Client options.
      *
      * @var Options
      */
-    public $options;
+    protected $options;
 
     /**
      * Request.
@@ -304,33 +304,6 @@ class HttpClient
     }
 
     /**
-     * Create response.
-     *
-     * @return Response
-     */
-    protected function createMultiResponse($master)
-    {
-
-        // Set response headers.
-        $this->responseHeaders = '';
-        \curl_setopt($this->ch, CURLOPT_HEADERFUNCTION, function ($_, $headers) {
-            $this->responseHeaders .= $headers;
-            return \strlen($headers);
-        });
-
-        // Get response data.
-        // $body    = \curl_exec($this->ch);
-        curl_multi_add_handle($master, $this->ch);
-        // $code    = \curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
-        // $headers = $this->getResponseHeaders();
-        //
-        // // Register response.
-        // $this->response = new Response($code, $headers, $body);
-        //
-        // return $this->getResponse();
-    }
-
-    /**
      * Set default cURL settings.
      */
     protected function setDefaultCurlSettings()
@@ -438,40 +411,6 @@ class HttpClient
 
         // Get response.
         $response = $this->createResponse();
-
-        // Check for cURL errors.
-        if (\curl_errno($this->ch)) {
-            throw new HttpClientException('cURL Error: ' . \curl_error($this->ch), 0, $request, $response);
-        }
-
-        \curl_close($this->ch);
-
-        return $this->processResponse();
-    }
-
-    /**
-     * Make requests.
-     *
-     * @param string $endpoint   Request endpoint.
-     * @param string $method     Request method.
-     * @param array  $data       Request data.
-     * @param array  $parameters Request parameters.
-     *
-     * @return array
-     */
-    public function multiRequest($endpoint, $method, $data = [], $parameters = [], $master)
-    {
-        // Initialize cURL.
-        $this->ch = \curl_init();
-
-        // Set request args.
-        $request = $this->createRequest($endpoint, $method, $data, $parameters);
-
-        // Default cURL settings.
-        $this->setDefaultCurlSettings();
-
-        // Get response.
-        $this->createMultiResponse($master);
 
         // Check for cURL errors.
         if (\curl_errno($this->ch)) {

@@ -83,26 +83,6 @@ class Client
     }
 
     /**
-     * GET with count method.
-     *
-     * @param string $endpoint   API endpoint.
-     * @param array  $parameters Request parameters.
-     *
-     * @return array
-     */
-    public function getWithCount($endpoint, $count = 100)
-    {
-        $page_count = $count / 100;
-        $nodes = array();
-        $results_arr = array();
-        for($i=0; $i<$page_count; $i++){
-            $nodes[i] = array('page' => $i + 1, 'per_page' => 100);
-            array_merge($results_arr, $this->http->request($endpoint, 'GET', [], $nodes[i]));
-        }
-        return $results_arr;
-    }
-
-    /**
      * GETALL method.
      *
      * @param string $endpoint   API endpoint.
