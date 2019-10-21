@@ -14,6 +14,7 @@ $woocommerce = new Client(
     ]
 );
 
+// print_r(phpinfo());
 
 try {
     // Array of response results.
@@ -27,6 +28,9 @@ try {
             'version' => 'wc/v3',
         ]
     );
+    $results = $woocommerce->getWithCount('customers', $count);
+    echo(count($results));
+    var_dump($results);
 } catch (HttpClientException $e) {
     echo '<pre><code>' . print_r( $e->getMessage(), true ) . '</code><pre>'; // Error message.
     echo '<pre><code>' . print_r( $e->getRequest(), true ) . '</code><pre>'; // Last request data.
